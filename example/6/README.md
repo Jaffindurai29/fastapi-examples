@@ -15,6 +15,12 @@ uvicorn main:app --reload
 |---|---|
 | `GET /items/{item_id}` | Same as a basic path parameter, but with a `summary` and a docstring that both show up in `/docs` |
 
+`{item_id}` is a placeholder — replace it with a real number:
+
+```bash
+curl http://127.0.0.1:8000/items/5
+```
+
 Open [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs) and
 [http://127.0.0.1:8000/redoc](http://127.0.0.1:8000/redoc) to see the
 difference the summary/docstring makes, and

@@ -28,8 +28,18 @@ uvicorn main:app --reload
 | Route | Description |
 |---|---|
 | `GET /items` | Lists all items |
-| `POST /items?name=Baz` | Appends an item |
-| `PUT /items/{item_id}?name=Qux` | Replaces an item |
-| `DELETE /items/{item_id}` | Removes an item |
+| `POST /items?name=` | Appends an item |
+| `PUT /items/{item_id}?name=` | Replaces the item at index `item_id` |
+| `DELETE /items/{item_id}` | Removes the item at index `item_id` |
 
-Try any route at [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs).
+`{item_id}` is a placeholder — replace it with a real number (e.g. `0`),
+don't paste the braces literally. Try it:
+
+```bash
+curl -X POST "http://127.0.0.1:8000/items?name=Baz"
+curl -X PUT "http://127.0.0.1:8000/items/0?name=Qux"
+curl -X DELETE "http://127.0.0.1:8000/items/0"
+```
+
+Or use [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs), which
+fills in path/query values through a form instead of a raw URL.
