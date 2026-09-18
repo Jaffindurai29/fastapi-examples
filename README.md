@@ -8,12 +8,17 @@ documentation site under `fastapi/`.
 
 ```
 fast-api-learn/
-├── example/
-│   ├── 1/main.py     # minimal "Hello, FastAPI!" app
-│   └── 2/main.py     # adds a path parameter (/items/{item_id})
-├── fastapi/          # Fumadocs docs site (Next.js) — see fastapi/README.md
-├── requirements.txt  # Python dependencies for the example apps
-└── venv/             # Python virtual environment (not committed)
+├── example/           # one folder per docs topic, lettered subfolders per snippet
+│   ├── 1/a, 1/b       # First Steps
+│   ├── 2/a, 2/b, 2/c  # Path Parameters
+│   ├── 3/a..3/d       # Query Parameters
+│   ├── 4/a..4/c       # Request Body
+│   ├── 5/a..5/c       # Response & Status Codes
+│   └── 6/a            # Interactive Docs
+│   (see example/README.md for the full topic → docs-page map)
+├── fastapi/           # Fumadocs docs site (Next.js) — see fastapi/README.md
+├── requirements.txt   # Python dependencies for the example apps
+└── venv/              # Python virtual environment (not committed)
 ```
 
 ## Environment setup
@@ -45,16 +50,13 @@ Requires Python 3.8+.
 
 ## Running an example app
 
-Each example lives in its own folder with its own `main.py`. `cd` into the
-one you want to run, then start it with Uvicorn:
+Each snippet lives in its own folder with its own `main.py`. `cd` into the
+one you want to run (topic number, then letter), then start it with
+Uvicorn — see [example/README.md](example/README.md) for what each topic
+and letter covers:
 
 ```bash
-cd example/1
-uvicorn main:app --reload
-```
-
-```bash
-cd example/2
+cd example/2/a
 uvicorn main:app --reload
 ```
 
