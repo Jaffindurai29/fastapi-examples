@@ -1,0 +1,7 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# fastapi/ is its own git repository (Next.js app) — managed separately
+/fastapi/
