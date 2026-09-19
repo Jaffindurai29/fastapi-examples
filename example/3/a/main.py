@@ -1,11 +1,18 @@
 from fastapi import FastAPI
+from pydantic import BaseModel
 
 app = FastAPI()
 
 
-# The name comes from the URL itself — visiting /hello/Alice is
-# different from visiting /hello/Bob. That's what "dynamic" means
-# here: the response changes based on what's in the request.
-@app.get("/hello/{name}")
-def say_hello(name: str):
-    return {"message": f"Hello, {name}!"}
+# A Pydantic model describes the shape of the JSON body a POST request
+# should send — two required fields here, both plain types.
+class Item(BaseModel):
+    name: str
+    price: float
+
+
+@app.post("/items")
+def create_item(item: Item):
+    # FastAPI already parsed and validated the JSON body into `item`
+    # before this function ran. Returning it sends it straight back.
+    return item
