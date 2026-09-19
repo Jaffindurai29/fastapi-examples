@@ -1,18 +1,37 @@
-from typing import Optional
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
 
 app = FastAPI()
 
-@app.get("/users/{user_id}/items/{item_id}")
-def read_user_item(
-    user_id: int,
-    item_id: str,
-    q: Optional[str] = None,
-    short: bool = False,
-):
-    item = {"item_id": item_id, "owner_id": user_id}
-    if q:
-        item.update({"q": q})
-    if not short:
-        item.update({"description": "This is a long description"})
-    return item
+
+class CalculateRequest(BaseModel):
+    a: float
+    b: float
+    # only these four words are accepted — anything else falls through
+    # to the "else" branch below and returns an error.
+    operation: str
+
+
+@app.post("/calculate")
+def calculate(request: CalculateRequest):
+    if request.operation == "add":
+        result = request.a + request.b
+    elif request.operation == "subtract":
+        result = request.a - request.b
+    elif request.operation == "multiply":
+        result = request.a * request.b
+    elif request.operation == "divide":
+        if request.b == 0:
+            # Dividing by zero isn't a bug in the request's shape (that's
+            # what a 422 is for) — it's a bad value. 400 is the right
+            # status code for "the request was well-formed, but this
+            # specific input can't be processed."
+            raise HTTPException(status_code=400, detail="Cannot divide by zero")
+        result = request.a / request.b
+    else:
+        raise HTTPException(
+            status_code=400,
+            detail="operation must be one of: add, subtract, multiply, divide",
+        )
+
+    return {"result": result}

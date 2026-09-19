@@ -2,8 +2,10 @@ from fastapi import FastAPI
 
 app = FastAPI()
 
-fake_items = [{"name": "Foo"}, {"name": "Bar"}, {"name": "Baz"}]
 
-@app.get("/items")
-def list_items(skip: int = 0, limit: int = 10):
-    return fake_items[skip : skip + limit]
+# The name comes from the URL itself — visiting /hello/Alice is
+# different from visiting /hello/Bob. That's what "dynamic" means
+# here: the response changes based on what's in the request.
+@app.get("/hello/{name}")
+def say_hello(name: str):
+    return {"message": f"Hello, {name}!"}

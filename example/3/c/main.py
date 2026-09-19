@@ -1,7 +1,14 @@
 from fastapi import FastAPI
+from pydantic import BaseModel
 
 app = FastAPI()
 
-@app.get("/items/{item_id}")
-def read_item(item_id: str, needy: str):
-    return {"item_id": item_id, "needy": needy}
+
+class AddRequest(BaseModel):
+    a: float
+    b: float
+
+
+@app.post("/add")
+def add_numbers(request: AddRequest):
+    return {"result": request.a + request.b}

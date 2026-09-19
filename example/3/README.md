@@ -1,81 +1,16 @@
-# 3 — Query Parameters
+# 3 — Practice
 
-Reading optional values from the query string.
+Six small, standalone drills — not tied to a docs page like the other
+topics, just quick practice right after First Steps.
 
-## 3/a — Basic query parameters
-
-```bash
-cd example/3/a
-uvicorn main:app --reload
-```
-
-| Route | Description |
+| Sub-topic | What it covers |
 |---|---|
-| `GET /items?skip=0&limit=10` | Slices an in-memory list; both params default if omitted |
+| [3/a — GET, dynamic name](a) | Read a value straight from the URL path. |
+| [3/b — POST, dynamic name](b) | Same, but from a JSON body instead. |
+| [3/c — Add two numbers](c) | A POST route that does simple math. |
+| [3/d — Calculator](d) | Branch on an `operation` field, handle bad input on purpose. |
+| [3/e — Show, append, print](e) | A tiny in-memory list with GET and POST. |
+| [3/f — Login authentication](f) | The shape of a login check, kept deliberately simple. |
 
-```bash
-curl "http://127.0.0.1:8000/items?skip=1&limit=2"
-```
-
-## 3/b — Optional query parameter
-
-```bash
-cd example/3/b
-uvicorn main:app --reload
-```
-
-| Route | Description |
-|---|---|
-| `GET /items/{item_id}?q=` | `q` is optional; included in the response only if given |
-
-`{item_id}` is a placeholder — replace it with a real value, don't paste
-the braces literally:
-
-```bash
-curl http://127.0.0.1:8000/items/5
-curl "http://127.0.0.1:8000/items/5?q=hi"
-```
-
-## 3/c — Required query parameter
-
-A query parameter with no default value is required, even though it's
-not part of the path.
-
-```bash
-cd example/3/c
-uvicorn main:app --reload
-```
-
-| Route | Description |
-|---|---|
-| `GET /items/{item_id}?needy=` | `needy` is required — omitting it returns `422` |
-
-```bash
-curl http://127.0.0.1:8000/items/5             # 422, "needy" is missing
-curl "http://127.0.0.1:8000/items/5?needy=x"
-```
-
-## 3/d — Mixing path and query parameters
-
-```bash
-cd example/3/d
-uvicorn main:app --reload
-```
-
-| Route | Description |
-|---|---|
-| `GET /users/{user_id}/items/{item_id}?q=&short=` | Two path params plus an optional `q` and a `bool` `short` flag |
-
-`{user_id}` and `{item_id}` are placeholders in the route pattern above —
-they're not meant to be pasted literally into a URL. A real request looks
-like:
-
-```bash
-curl "http://127.0.0.1:8000/users/1/items/foo?q=hi&short=true"
-```
-
-(`short` accepts `true`/`false`, `1`/`0`, or `yes`/`no` — not the word
-`bool`.)
-
-Try any route at [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs),
-which fills in path/query values through a form instead of a raw URL.
+Each folder above has its own **README.md** (how to run it, routes,
+`curl`/Postman) and **STEPS.md** (line-by-line code walkthrough).
