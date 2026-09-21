@@ -23,7 +23,7 @@ backend and frontend running at once:
    already done):
 
    ```bash
-   pip install sqlalchemy pymysql
+   pip install -r ../../requirements.txt
    ```
 
    ```sql
@@ -37,6 +37,10 @@ backend and frontend running at once:
    export MYSQL_PASSWORD=your-password
    export MYSQL_DB=fastapi_learn
    ```
+
+   ...or `cp example/7/a/.env.example example/7/a/.env` and edit that
+   instead — `database.py` loads it automatically. Skipping both is
+   also fine; the defaults above are already baked in.
 
    No MySQL handy? `export DATABASE_URL="sqlite:///./test.db"` instead.
 

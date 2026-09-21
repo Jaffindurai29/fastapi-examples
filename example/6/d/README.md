@@ -1,7 +1,9 @@
 # 6/d — PATCH (MySQL)
 
 Partially updating a row by ID — the field is optional. Same
-[setup](../a/README.md#setup) as 6/a. See [STEPS.md](STEPS.md) for a
+[setup](../a/README.md#setup) and [file layout](../a/README.md#files)
+as 6/a — this folder also has its own `.env.example` (`cp .env.example
+.env` if you want one here too). See [STEPS.md](STEPS.md) for a
 line-by-line walkthrough.
 
 ```bash

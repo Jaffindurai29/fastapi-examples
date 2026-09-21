@@ -5,10 +5,21 @@ one row by ID. Seeded with two rows so this works standalone. See
 [STEPS.md](STEPS.md) for a line-by-line walkthrough, and
 [Setup](#setup) below before running it.
 
+## Files
+
+The code is split into layers instead of one file:
+
+| File | Responsibility |
+|---|---|
+| `database.py` | env vars, `engine`, `SessionLocal`, `Base`, `get_db()` |
+| `models.py` | `ItemModel` — the SQLAlchemy table |
+| `crud.py` | plain functions that talk to the database, no HTTP |
+| `main.py` | the `FastAPI()` app and the two routes |
+
 ## Setup
 
 ```bash
-pip install sqlalchemy pymysql
+pip install -r ../../../requirements.txt
 ```
 
 Create the database once, in your MySQL client:
@@ -17,8 +28,8 @@ Create the database once, in your MySQL client:
 CREATE DATABASE fastapi_learn;
 ```
 
-Then set connection details as environment variables (adjust to match
-your MySQL install):
+Then either export connection details as environment variables (adjust
+to match your MySQL install):
 
 ```bash
 export MYSQL_HOST=127.0.0.1
@@ -26,6 +37,15 @@ export MYSQL_PORT=3306
 export MYSQL_USER=root
 export MYSQL_PASSWORD=your-password
 export MYSQL_DB=fastapi_learn
+```
+
+...or copy `.env.example` to `.env` and edit it there instead — either
+way works, since `database.py` loads `.env` automatically. Skipping
+both is also fine: the defaults above (`root`, no password, on
+`127.0.0.1`) are already baked in.
+
+```bash
+cp .env.example .env
 ```
 
 No MySQL handy? Point it at a SQLite file instead — the same code works

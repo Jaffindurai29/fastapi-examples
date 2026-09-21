@@ -3,8 +3,20 @@
 All five verbs from [topic 6](../../6) combined into one running app,
 plus `CORSMiddleware` so the [React frontend](../react) can call it.
 Same [setup](../../6/a/README.md#setup) as topic 6 — install
-`sqlalchemy`/`pymysql`, create the database, set your connection env
-vars (or point `DATABASE_URL` at SQLite for a quick local try).
+dependencies from the repo's `requirements.txt`, create the database,
+set your connection env vars (or copy `.env.example` to `.env`, or
+point `DATABASE_URL` at SQLite for a quick local try).
+
+## Files
+
+Same [layered structure](../../6/a/README.md#files) as topic 6 —
+`database.py`/`models.py`/`schemas.py`/`crud.py`/`main.py` — except
+`schemas.py` has both `ItemRequest` and `ItemPatch` (this app needs
+both), `crud.py` has all six functions (one per verb, plus
+`seed_items`), and `main.py` also registers `CORSMiddleware`. This
+app's table is its own `crud_react_items`, separate from topic 6's
+shared `items` table, so running this folder never touches topic 6's
+data or vice versa.
 
 ```bash
 cd example/7/a

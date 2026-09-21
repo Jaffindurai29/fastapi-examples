@@ -14,7 +14,16 @@ it applies to all five.
 | [6/e — DELETE](e) | `DELETE` | Remove a row by ID. |
 
 Each folder above has its own **README.md** (how to run it, routes,
-`curl`/Postman) and **STEPS.md** (line-by-line code walkthrough).
+`curl`/Postman), **STEPS.md** (line-by-line code walkthrough), and is
+split into `database.py`/`models.py`/`schemas.py`/`crud.py`/`main.py`
+instead of one file — see [6/a's Files section](a/README.md#files) for
+what each one does.
+
+All five folders point at the same `items` table (not five separate
+tables), so they share state if run against the same database — if
+you've already run another lesson against the same database, run
+`GET /items` first to see which ids currently exist before trying a
+`curl`/Postman example that references a specific id.
 
 Want to call this from a browser? See [7 — React + MySQL + CRUD](../7), which
 adds CORS and a real frontend on top of this same shape.
