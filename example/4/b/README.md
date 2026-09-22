@@ -11,20 +11,19 @@ uvicorn main:app --reload
 
 | Route | Description |
 |---|---|
-| `POST /items` | Appends one value; returns `201 Created` with the new item's index |
+| `GET /items` | Returns the current list |
+| `POST /items` | Appends one value (query parameter); returns the new item's index |
 
 ```bash
-curl -i -X POST http://127.0.0.1:8000/items -H "Content-Type: application/json" -d "{\"value\": \"third\"}"
+curl http://127.0.0.1:8000/items
+
+curl -i -X POST "http://127.0.0.1:8000/items?value=third"
 ```
 
-**Postman:** Method `POST`, URL `http://127.0.0.1:8000/items`, Body →
-raw → JSON:
+**Postman:** Method `POST`, URL `http://127.0.0.1:8000/items`, Params →
+`value` = `third`.
 
-```json
-{"value": "third"}
-```
-
-Expected response: `201 Created`, `{"index": 2, "value": "third"}`.
+Expected response: `200 OK`, `{"index": 2, "value": "third"}`.
 
 Windows curl quoting, Postman basics, and "405 Method Not Allowed" are
 covered generically in the [root README](../../../README.md).

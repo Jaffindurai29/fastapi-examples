@@ -10,20 +10,16 @@ uvicorn main:app --reload
 
 | Route | Description |
 |---|---|
-| `PUT /items/{item_index}` | Replaces the whole item at that index; out-of-range returns `404` |
+| `PUT /items/{item_index}` | Replaces the whole item at that index (query parameter); out-of-range returns `404` |
 
 ```bash
-curl -X PUT http://127.0.0.1:8000/items/0 -H "Content-Type: application/json" -d "{\"value\": \"replaced\"}"
+curl -X PUT "http://127.0.0.1:8000/items/0?value=replaced"
 
-curl -i -X PUT http://127.0.0.1:8000/items/99 -H "Content-Type: application/json" -d "{\"value\": \"x\"}"   # 404
+curl -i -X PUT "http://127.0.0.1:8000/items/99?value=x"   # 404
 ```
 
-**Postman:** Method `PUT`, URL `http://127.0.0.1:8000/items/0`, Body →
-raw → JSON:
-
-```json
-{"value": "replaced"}
-```
+**Postman:** Method `PUT`, URL `http://127.0.0.1:8000/items/0`, Params →
+`value` = `replaced`.
 
 Windows curl quoting, Postman basics, and "405 Method Not Allowed" are
 covered generically in the [root README](../../../README.md).

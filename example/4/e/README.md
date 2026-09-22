@@ -10,6 +10,7 @@ uvicorn main:app --reload
 
 | Route | Description |
 |---|---|
+| `GET /items` | Returns the current list |
 | `DELETE /items/{item_index}` | Removes that item; returns `204 No Content`; out-of-range returns `404` |
 
 ```bash

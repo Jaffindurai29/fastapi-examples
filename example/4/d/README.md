@@ -10,23 +10,20 @@ uvicorn main:app --reload
 
 | Route | Description |
 |---|---|
-| `PATCH /items/{item_index}` | Updates `value` only if it's sent; out-of-range returns `404` |
+| `GET /items` | Returns the current list |
+| `PATCH /items/{item_index}` | Updates `value` only if it's sent (query parameter); out-of-range returns `404` |
 
 ```bash
-curl -X PATCH http://127.0.0.1:8000/items/1 -H "Content-Type: application/json" -d "{\"value\": \"patched\"}"
+curl -X PATCH "http://127.0.0.1:8000/items/1?value=patched"
 
-curl -X PATCH http://127.0.0.1:8000/items/0 -H "Content-Type: application/json" -d "{}"
+curl -X PATCH http://127.0.0.1:8000/items/0
 ```
 
-**Postman:** Method `PATCH`, URL `http://127.0.0.1:8000/items/1`, Body →
-raw → JSON:
+**Postman:** Method `PATCH`, URL `http://127.0.0.1:8000/items/1`, Params →
+`value` = `patched`.
 
-```json
-{"value": "patched"}
-```
-
-Try an empty body (`{}`) too — the item at that index comes back
-unchanged, since nothing was sent to update.
+Try the request with no `value` param too — the item at that index
+comes back unchanged, since nothing was sent to update.
 
 Windows curl quoting, Postman basics, and "405 Method Not Allowed" are
 covered generically in the [root README](../../../README.md).

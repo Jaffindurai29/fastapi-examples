@@ -1,14 +1,16 @@
 # 4/b — POST, step by step
 
-1. **`status_code=status.HTTP_201_CREATED`** on the decorator — `POST`
-   routes default to `200`; `201` is the more correct code for "a new
-   resource was created," and `status.HTTP_201_CREATED` reads clearer
-   than the bare number `201`.
+1. **`def list_items()`** — a plain `GET /items` so you can see the
+   array's current state before and after posting to it.
 
-2. **`data.append(item.value)`** — adds the new value onto the end of
+2. **`def create_item(value: str)`** — since `value` isn't a Pydantic
+   model or a path parameter, FastAPI treats it as a query parameter,
+   so it's read from the URL (`?value=third`) instead of a JSON body.
+
+3. **`data.append(value)`** — adds the new value onto the end of
    the shared array.
 
-3. **`return {"index": len(data) - 1, "value": item.value}`** — tells
+4. **`return {"index": len(data) - 1, "value": value}`** — tells
    the caller exactly where the new item landed, so a follow-up
    `GET /items/{index}` (or `PUT`/`PATCH`/`DELETE`) knows which index to
    use.
