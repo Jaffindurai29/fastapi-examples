@@ -15,7 +15,13 @@ fast-api-learn/
 │   ├── 4/a..4/e       # Array + CRUD (GET/POST/PUT/PATCH/DELETE)
 │   ├── 5/a, 5/react   # React + Array + CRUD (array backend + frontend)
 │   ├── 6/a..6/e       # MySQL + CRUD
-│   └── 7/a, 7/react   # React + MySQL + CRUD (MySQL backend + frontend)
+│   ├── 7/a, 7/react   # React + MySQL + CRUD (MySQL backend + frontend)
+│   ├── 8/a..8/d       # Validation & errors
+│   ├── 9/a..9/d       # Query params, pagination & filtering
+│   ├── 10/a..10/d     # Project structure (routers, Depends, settings, async)
+│   ├── 11/a..11/e     # Relationships, transactions & soft delete
+│   ├── 12/a..12/j, 12/react  # Security (hashing, JWT, roles, encryption, ...)
+│   └── 13/a           # Database migrations (Alembic)
 │   (see example/README.md for the full index,
 │    and each letter folder's own STEPS.md for a code walkthrough)
 ├── fastapi/           # Fumadocs docs site (Next.js) — see fastapi/README.md

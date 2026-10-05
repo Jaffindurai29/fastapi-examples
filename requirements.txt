@@ -3,3 +3,10 @@ uvicorn[standard]
 sqlalchemy
 pymysql
 python-dotenv
+pydantic-settings
+pwdlib[argon2]
+pyjwt
+cryptography
+sqids
+slowapi
+alembic
